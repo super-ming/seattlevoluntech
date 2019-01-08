@@ -18,10 +18,19 @@ class AuthRedirect extends React.Component {
     };
   }
 
+  handleAuthentication(location) {
+    if (/access_token|id_token|error/.test(location.hash)) {
+      this.props.auth.handleAuthentication();
+      console.log('auth done');
+    }
+  }
+
   // this method works predominantly because of the SPA nav
   // if we were constantly rendering to different pages, logic would get hairy
-  handleRoutingCases(path, token) {
+  handleRoutingCases(path) {
     let sendTo = null;
+    console.log(this.props);
+    const token = this.handleAuthentication(this.props.location);
 
     // default for "un-authorized users"
     if (!token) {
@@ -35,13 +44,14 @@ class AuthRedirect extends React.Component {
 
     // default for "authorized users"
     if (token) {
-      sendTo = routes.DASHBOARD_FRONTEND;
+      // sendTo = routes.DASHBOARD_FRONTEND;
+      sendTo = routes.SITE_ROOT_FRONTEND;
     }
 
     // additional catch:
     // only allow additional 'site traveling' if path is on approvedPaths list
     if (token && this.approvedPaths[path]) {
-      sendTo = path;
+      // sendTo = path;
     }
 
     // final catch *:
