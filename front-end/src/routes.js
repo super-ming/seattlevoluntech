@@ -7,3 +7,5 @@ export const LOGIN_FRONTEND = '/login';
 export const SIGNUP_FRONTEND = '/signup';
 export const DASHBOARD_FRONTEND = '/dashboard';
 export const PROJECTS_FRONTEND = '/projects';
+export const HOME_FRONTEND = '/home';
+export const CALLBACK_FRONTEND = '/callback';
