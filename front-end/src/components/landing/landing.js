@@ -34,12 +34,20 @@ class Landing extends React.Component {
     </div>;
   }
 
+  componentDidMount() {
+    const { renewSession } = this.props.auth;
+
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      renewSession();
+    }
+  }
+
   render() {
     const { location } = this.props;
     return (
       <Fragment>
         <section>
-          <NavUi location={location} />
+          <NavUi location={location} auth={this.props.auth}/>
           <LandingImage />
           {/* { location.pathname === routes.LOGIN_FRONTEND ? this.loginForm() : null } */}
           {/* { location.pathname === routes.SIGNUP_FRONTEND ? this.signUpForm() : null } */}
